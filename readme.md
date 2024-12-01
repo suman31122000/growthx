@@ -25,7 +25,33 @@ Develop a backend system for an assignment submission portal that supports Users
 - Accept or reject assignments with reasons if needed.
 
 ---
- 
+### Workflow: Assignment Submission Portal
+
+The system workflow involves two types of users: **Users** and **Admins**. Here is a step-by-step breakdown:
+
+1. **Registration**:  
+   Both Users and Admins register themselves in the system by providing their details such as name, email, password, and role (`user` or `admin`).
+
+2. **Login**:  
+   - Users and Admins log in using their registered credentials.
+   - Upon successful login, a **JWT token** is generated and stored securely in cookies for authentication.
+
+3. **User Actions**:  
+   - A User, after logging in, can upload an assignment by providing a **task description** and specifying the **Admin's name** under whose review the assignment is submitted.
+   - The submitted assignment is stored in the database with a default status of `pending`.
+
+4. **Admin Actions**:  
+   - Admins log in to the portal and fetch all assignments tagged with their name.
+   - Admins can review the assignments and decide to either:
+     - **Accept** the assignment, updating its status to `accepted`.
+     - **Reject** the assignment, updating its status to `rejected`.
+
+5. **Assignment Status Updates**:  
+   - The status (`accepted` or `rejected`) is updated in the database and reflects in the system for tracking and record-keeping.
+
+This workflow ensures seamless interaction between Users and Admins for assignment submission, review, and decision-making.
+
+---
  setup for this project
  
 check node  and npm version
