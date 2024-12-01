@@ -48,4 +48,13 @@ const uploadAssignment = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser, uploadAssignment };
+const getadmin=async(req,res)=>{
+  try {
+    const admin=await User.find({role:"admin"}).select("name email");
+    return res.status(200).json(admin)
+  } catch (error) {
+    console.log(error,"admindata in problem");
+  }
+}
+
+export { registerUser, loginUser, uploadAssignment,getadmin};
