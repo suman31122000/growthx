@@ -5,14 +5,14 @@ Objective
 Develop a backend system for an assignment submission portal that supports Users and Admins. The system allows users to upload assignments and admins to accept or reject those assignments.
 
 ---
+## Technology Stack
 
-Technology Stack
-Backend Framework: Node.js with Express.js
-Database: MongoDB
-Language: JavaScript 
-Authentication: JSON Web Tokens (JWT)
+- **Backend Framework:** Node.js with Express.js
+- **Database:** MongoDB
+- **Language:** JavaScript (TypeScript optional for enhanced typing and maintainability)
+- **Authentication:** JSON Web Tokens (JWT)
+- **File Upload:** Multer
 ---
-
 Assignment Submission Portal - Project Documentation
 Objective
 Develop a backend system for an assignment submission portal that supports Users and Admins. The system allows users to upload assignments and admins to accept or reject those assignments.
@@ -361,5 +361,6 @@ apart from this i have used bcrypt to encrypt the password before saving it on d
 here we are using 2 bcrypt method (hash,compare)
 hash:for hashing the code
 compare;to verify the password
+
 
 
