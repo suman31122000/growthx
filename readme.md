@@ -15,7 +15,7 @@ if not shows any version then install it
 Initialize the Project: Run the following command to create a package.json file, which manages project dependencies and metadata
 ```bash
 npm init
-
+```bash
 You'll be prompted to provide details such as:
 Package name
 Version
