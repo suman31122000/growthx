@@ -48,6 +48,7 @@ const uploadAssignment = async (req, res) => {
   }
 };
 
+//fetching all the admin name and email
 const getadmin=async(req,res)=>{
   try {
     const admin=await User.find({role:"admin"}).select("name email");
@@ -57,4 +58,10 @@ const getadmin=async(req,res)=>{
   }
 }
 
-export { registerUser, loginUser, uploadAssignment,getadmin};
+//function to logout the user and clearing the cookie
+const logoutuser = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Logout successful' });
+};
+
+export { registerUser, loginUser, uploadAssignment,getadmin,logoutuser};

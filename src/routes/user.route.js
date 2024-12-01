@@ -1,6 +1,6 @@
 import express from "express";
 import  Router  from "express";
-import { registerUser, loginUser, uploadAssignment ,getadmin} from "../controller/user.controller.js";
+import { registerUser, loginUser, uploadAssignment ,getadmin,logoutuser} from "../controller/user.controller.js";
 import { getAssignments ,updateAssignmentStatus} from "../controller/admin.controller.js";
 import auth from "../middleware/authmiddleware.js";
 import { get } from "http";
@@ -14,6 +14,7 @@ router.route('/assignments/:id/accept').post(auth,updateAssignmentStatus);
 router.route('/assignments/:id/reject').post(auth,updateAssignmentStatus);
 router.route('/assignments').get(auth,getAssignments);
 router.route('/upload').post(auth,uploadAssignment);
+router.route('/logout').get(auth,logoutuser);
 export default router;
 
 

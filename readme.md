@@ -397,5 +397,13 @@ Passwords are securely stored in the database using `bcrypt` to protect sensitiv
 - **`compare`**:  
   Compares a plain-text password with the hashed password stored in the database during login. This validates the user's credentials without exposing the actual password.
 
+### logout the user and admin
+```js
+//function to logout the user and clearing the token
+const logoutuser = (req, res) => {
+  res.clearCookie('token');
+  res.status(200).json({ message: 'Logout successful' });
+};
+```
 
 
