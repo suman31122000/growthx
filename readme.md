@@ -226,8 +226,60 @@ const updateAssignmentStatus = async (req, res) => {
 export { getAssignments, updateAssignmentStatus };
 
 ```
+till now we have completed all the controller and database part
 
+now i have design api endpoints which handle the request and bring controller in action
+![alt text](image-1.png)
 
+Image shows the basics of image desigining but in this assignment we dont implement as we dont need it because of smaller server load and small datasize
+
+```js
+import express from "express";
+import  Router  from "express";
+import { registerUser, loginUser, uploadAssignment } from "../controller/user.controller.js";
+import { getAssignments ,updateAssignmentStatus} from "../controller/admin.controller.js";
+import auth from "../middleware/authmiddleware.js";
+
+//creating routes
+const router = Router();
+router.route('/register').post(registerUser);
+router.route('/login').post(loginUser);
+router.route('/admin').post(auth,registerUser);
+router.route('/assignments/:id/accept').post(auth,updateAssignmentStatus);
+router.route('/assignments/:id/reject').post(auth,updateAssignmentStatus);
+router.route('/assignments').get(auth,getAssignments);
+router.route('/upload').post(auth,uploadAssignment);
+export default router;
+
+```
+in above code we can see that apart from controller i have injeacted a funtion name auth
+
+auth is a middleware which is used to verify whether the request is genuine or not. 
+
+//for authroization and authentication i used jsonwebtoken which provide 2 method sign and verify sign:used for generate the token by taking input as (payload,secret key,expires_time) and set it into cookies
+verify:it will verify the token by taking input as(token,secret key) and return decoded token
+
+```js
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
+
+//middleware for authentication
+const auth = (req, res, next) => {
+
+  const token =req.cookies?.token || req.header("Authorization")?.replace("Bearer ","");  //accessing token from cookie
+  if (!token) return res.status(401).json({ error: 'No token, authorization denied' }); //checking token
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET); //verifying token
+    req.user = decoded;  //setting user in req.user with decoded data
+    next();
+  } catch (error) {
+    res.status(400).json({ error: 'Token is not valid' });
+  }
+};
+export default auth;
+
+```
 
 
 
