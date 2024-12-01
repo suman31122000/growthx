@@ -7,5 +7,6 @@ BACKEND(NodeJS ExpressJS MongoDB)
  Node js Setup
  
  *check node version
-``` node -v
+```bash
+node -v
 
