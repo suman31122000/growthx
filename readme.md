@@ -1,7 +1,7 @@
 
-BACKEND(NodeJS ExpressJS MongoDB)
-Assignment Submission Portal - Project Documentation
-Objective
+## BACKEND(NodeJS ExpressJS MongoDB)
+# Assignment Submission Portal - Project Documentation
+- **Objective**
 Develop a backend system for an assignment submission portal that supports Users and Admins. The system allows users to upload assignments and admins to accept or reject those assignments.
 
 ---
@@ -9,30 +9,22 @@ Develop a backend system for an assignment submission portal that supports Users
 
 - **Backend Framework:** Node.js with Express.js
 - **Database:** MongoDB
-- **Language:** JavaScript (TypeScript optional for enhanced typing and maintainability)
+- **Language:** JavaScript 
 - **Authentication:** JSON Web Tokens (JWT)
-- **File Upload:** Multer
 ---
-Assignment Submission Portal - Project Documentation
-Objective
-Develop a backend system for an assignment submission portal that supports Users and Admins. The system allows users to upload assignments and admins to accept or reject those assignments.
 
-Technology Stack
-Backend Framework: Node.js with Express.js
-Database: MongoDB
-Language: JavaScript (TypeScript optional for enhanced typing and maintainability)
-Authentication: JSON Web Tokens (JWT)
-File Upload: Multer
+## Features
 
+### User Functionality:
+- User registration and login.
+- Ability to upload assignments.
 
-Features
-User Functionality:
-User registration and login.
-Ability to upload assignments.
-Admin Functionality:
-Admin registration and login.
-View all assignments tagged to them.
-Accept or reject assignments with reasons if needed.
+### Admin Functionality:
+- Admin registration and login.
+- View all assignments tagged to them.
+- Accept or reject assignments with reasons if needed.
+
+---
  
  setup for this project
  
@@ -252,12 +244,24 @@ router.route('/upload').post(auth,uploadAssignment);
 export default router;
 
 ```
-in above code we can see that apart from controller i have injeacted a funtion name auth
+## Middleware: `auth`
 
-auth is a middleware which is used to verify whether the request is genuine or not. 
+The `auth` middleware is used to verify the authenticity of incoming requests by ensuring the request has a valid token. This helps secure routes and enforces authorization and authentication.
 
-//for authroization and authentication i used jsonwebtoken which provide 2 method sign and verify sign:used for generate the token by taking input as (payload,secret key,expires_time) and set it into cookies
-verify:it will verify the token by taking input as(token,secret key) and return decoded token
+### JWT (JSON Web Token)
+- **Sign:** Generates a token using the following inputs:
+  - `payload`: Contains user-specific data (e.g., ID, role).
+  - `secret key`: A private key to encrypt the token.
+  - `expiresIn`: Specifies token expiration time (e.g., 1 hour).
+  - The generated token is then stored in cookies for secure communication.
+
+- **Verify:** Validates the token using:
+  - `token`: The JWT provided in the request header or cookies.
+  - `secret key`: Used to decode the token.
+  - If valid, it returns the decoded token; otherwise, it rejects the request.
+
+```javascript
+import jwt from "jsonwebtoken";
 
 ```js
 import jwt from 'jsonwebtoken';
@@ -356,11 +360,16 @@ we need to validate user input so that we can reduce inconsistency in code
     export { validateUserRegistration, validateUserLogin, validateAssignmentUpload, validateAssignmentStatusUpdate };
 ```
 
-apart from this i have used bcrypt to encrypt the password before saving it on database
 
-here we are using 2 bcrypt method (hash,compare)
-hash:for hashing the code
-compare;to verify the password
+### Password Encryption with bcrypt
+
+Passwords are securely stored in the database using `bcrypt` to protect sensitive user information. Two essential methods from `bcrypt` are utilized:
+
+- **`hash`**:  
+  Used to hash the password before storing it in the database. This ensures that even if the database is compromised, the passwords remain secure.
+
+- **`compare`**:  
+  Compares a plain-text password with the hashed password stored in the database during login. This validates the user's credentials without exposing the actual password.
 
 
 
